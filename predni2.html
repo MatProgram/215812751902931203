@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis documentos</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 0;
+      font-weight: bold; /* Toda la página en negrita */
+    }
+    .header {
+      background-color: #3772BE;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .header i {
+      margin-right: 10px;
+    }
+    .header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+    .blue-bar {
+      background-color: #3772BE;
+      color: white;
+      height: 20vh; /* Ajusté el tamaño de la barra */
+      display: flex;
+      align-items: center; /* Centra el contenido verticalmente */
+      justify-content: space-between; /* Distribuye el contenido de izquierda a derecha */
+      padding: 20px;
+      position: relative; /* Necesario para posicionar la imagen en la base */
+      box-sizing: border-box;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    .blue-bar h2 {
+      font-size: 24px; /* Hice más grande el texto */
+      margin: 0;
+      text-align: left;
+      flex-grow: 1;
+    }
+    .blue-bar img {
+      height: 150px; /* Tamaño más grande de la imagen */
+      width: 150px;
+      object-fit: contain;
+      position: absolute;
+      bottom: 0; /* Pegada a la base de la barra */
+      right: 0; /* Pegada a la derecha */
+    }
+    .content {
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .document-card {
+      background-color: white;
+      height: 80px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin: 10px 0;
+      margin-top: -45px;
+      box-sizing: border-box;
+      transition: transform 0.2s ease-in-out;
+      position: relative; /* Asegura que el recuadro esté en la capa más cercana */
+      z-index: 10; /* Asegura que el recuadro esté por encima de otros elementos */
+    }
+    .document-card:hover {
+      transform: scale(1.02);
+    }
+    .document-card img {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+    }
+    .document-card .document-info {
+      flex-grow: 1;
+      text-align: left; /* Alinea el texto a la izquierda */
+    }
+    .document-card .document-info h3 {
+      font-size: 14px; /* Texto más pequeño */
+      font-weight: bold; /* En negrita */
+      margin: 0;
+    }
+    .document-card .document-info span {
+      display: block;
+      font-size: 12px; /* Tamaño más pequeño para las siglas */
+      font-weight: bold; /* En negrita */
+    }
+    .document-card .dropdown-icon {
+      font-size: 18px;
+      color: #666;
+      margin-left: 15px; /* Separa la flecha del texto */
+      cursor: pointer; /* Indica que es clickeable */
+    }
+
+    /* Estilos para el menú desplegable */
+    .dropdown-menu {
+      display: none;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 10px;
+    }
+
+    /* Barra inferior */
+    .barra-inferior {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 12px 0;
+      height: 80px;
+    }
+
+    .barra-inferior {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 12px 0;
+      height: 80px;
+      flex-direction: row; /* Cambié de column a row */
+    }
+
+    .barra-inferior .flex {
+      display: flex;
+      flex-direction: column; /* Alinea el texto debajo de la imagen */
+      align-items: center; /* Centra el contenido dentro del flex */
+    }
+
+    .barra-inferior i, .barra-inferior img {
+      font-size: 22px;
+      color: gray;
+    }
+
+    .barra-inferior span {
+      font-size: 10px;
+      color: gray;
+    }
+
+    .barra-inferior .activo {
+      color: #35BDEC;
+    }
+
+    .tina {
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+    }
+ 
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .divider {
+      border-top: 1px solid #ccc;
+      margin: 10px 0;
+    }
+    .button-primary {
+      margin-top: 5px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .info {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .info strong {
+      color: #007bff;
+    }
+    .button-secondary {
+      background-color: white;
+      color: #007bff;
+      border: 2px solid #007bff;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .footer {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: #007bff;
+    }
+    .footer i {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <i class="fas fa-arrow-left"></i>
+    <h1>Mis documentos</h1>
+  </div>
+  <div class="blue-bar">
+    <h2>
+      Tus documentos importantes,<br/>en un solo lugar.
+    </h2>
+    <img alt="Imagen" src="https://miargentina.site/static/media/documentos-importantes-img.e3b5b6afc576bc34c0a4.webp" />
+  </div>
+  <div class="content">
+    <div class="document-card">
+      <img alt="Icono de Documento Nacional de Identidad (DNI)" src="https://miargentina.site/static/media/documento.a425f1f8f370d0a10554.webp" />
+      <div class="document-info">
+        <h3>Documento Nacional de Identidad</h3>
+        <span>(DNI)</span>
+      </div>
+      <i class="fas fa-chevron-down dropdown-icon"></i>
+    </div>
+
+    <div class="dropdown-menu">
+      <div class="container">
+         <button class="button-primary" onclick="window.location.href='postdni2.html';">
+          Ver DNI digital
+         </button>
+         <div class="info">
+          Información suministrada por
+          <strong>
+           RENAPER
+          </strong>
+         </div>
+         <div class="divider"></div>
+         <div class="info">
+          Recordá que podés solicitar el DNI para vos y para tus hijos y tenerlo disponible en la App.
+         </div>
+         <button class="button-secondary">
+          Solicitar DNI Digital
+         </button>
+         <div class="footer">
+          <i class="fas fa-info-circle"></i>
+          <span>
+           Cambié o voy a cambiar el dispositivo
+          </span>
+         </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="barra-inferior">
+    <div class="flex">
+      <i class="fas fa-home text-blue-400"></i>
+      <span class="text-blue-400">Inicio</span>
+    </div>
+    <div class="flex">
+      <i class="fas fa-newspaper text-gray-400"></i>
+      <span class="text-gray-400">Novedades</span>
+    </div>
+    <div class="flex">
+      <i class="fas fa-phone text-gray-400"></i>
+      <span class="text-gray-400">Teléfonos</span>
+    </div>
+    <div class="flex">
+      <img alt="Tina" class="tina" src="https://pps.whatsapp.net/v/t61.24694-24/309457271_662746508804470_7817635857637343941_n.jpg?ccb=11-4&oh=01_Q5AaIIKraJ2dVA14WXM-iX2vYamQTOVVGYI-g7CiNvuj1_nC&oe=67300DA9&_nc_sid=5e03e0&_nc_cat=105" />
+      <span class="text-gray-400">Tina</span>
+    </div>
+  </div>
+
+  <script>
+    const dropdownIcon = document.querySelector('.dropdown-icon');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    dropdownIcon.addEventListener('click', () => {
+      dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>

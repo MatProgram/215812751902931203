@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis documentos</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    /* Estilos globales */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 0;
+      font-weight: bold; /* Toda la página en negrita */
+    }
+
+    /* Barra superior */
+    .header {
+      background-color: #3772BE;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .header i {
+      margin-right: 10px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    /* Barra inferior */
+    .barra-inferior {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 15px 0;
+      height: 80px;
+      flex-direction: row;
+    }
+
+    .barra-inferior .flex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Asegura que los íconos y textos estén centrados */
+      text-align: center; /* Centra los textos debajo de los íconos */
+    }
+
+    .barra-inferior i, .barra-inferior img {
+      font-size: 22px;
+      color: gray;
+      margin-bottom: 5px; /* Espacio entre el ícono y el texto */
+    }
+
+    .barra-inferior span {
+      font-size: 10px;
+      color: gray;
+    }
+
+    .barra-inferior .activo {
+      color: #35BDEC;
+    }
+
+    .tina {
+      width: 28px;
+      height:  28px;
+      border-radius: 50%;
+      object-fit: cover; /* Asegura que la imagen mantenga su proporción */
+    }
+
+    /* Estilo del menú de PIN */
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left; /* Cambié a izquierda */
+      width: 80%; /* Aumento el ancho */
+      max-width: 450px;
+      margin: 15px auto 0; /* Menos margen superior */
+    }
+
+    .container h1 {
+      font-size: 1.2em; /* Reduzco el tamaño del título */
+      margin-bottom: 15px;
+      color: #333;
+      font-weight: normal; /* Quita negrita */
+    }
+
+    .container input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px; /* Agrego margen entre el input y el botón */
+      border: none;
+      border-bottom: 2px solid #007bff;
+      font-size: 1em; /* Reducir el tamaño del texto */
+      color: #757575;
+      text-align: left; /* Centrar los números dentro del input */
+    }
+
+    .container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.9em; /* Reducir el tamaño del texto */
+      font-weight: bold; /* Hacer negrita */
+      cursor: pointer;
+    }
+
+    .container a {
+      display: block;
+      margin-top: 15px; /* Más margen entre el botón y el enlace */
+      color: #007bff;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.85em; /* Reducir el tamaño del texto del enlace */
+    }
+
+    /* Mensaje de error */
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <div class="header">
+    <i class="fas fa-arrow-left"></i>
+    <h1>DNI Digital</h1>
+  </div>
+
+  <!-- Menú de PIN -->
+  <div class="container">
+    <h1>Ingresa tu PIN de acceso</h1>
+    <form id="pinForm">
+      <input type="text" id="pinInput" placeholder="123456" maxlength="6" required pattern="\d{6}" title="Debe ser un número de 6 dígitos">
+      <button type="submit">Ingresar</button>
+    </form>
+    <a href="#">Olvidé mi PIN</a>
+    <div id="errorMessage" class="error"></div>
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="barra-inferior">
+    <div class="flex">
+      <i class="fas fa-home text-blue-400"></i>
+      <span class="text-blue-400">Inicio</span>
+    </div>
+    <div class="flex">
+      <i class="fas fa-newspaper text-gray-400"></i>
+      <span class="text-gray-400">Novedades</span>
+    </div>
+    <div class="flex">
+      <i class="fas fa-phone text-gray-400"></i>
+      <span class="text-gray-400">Teléfonos</span>
+    </div>
+    <div class="flex">
+      <img alt="Tina" class="tina" src="https://pps.whatsapp.net/v/t61.24694-24/309457271_662746508804470_7817635857637343941_n.jpg?ccb=11-4&oh=01_Q5AaIIKraJ2dVA14WXM-iX2vYamQTOVVGYI-g7CiNvuj1_nC&oe=67300DA9&_nc_sid=5e03e0&_nc_cat=105" />
+      <span class="text-gray-400">Tina</span>
+    </div>
+  </div>
+
+  <script>
+    // Validación del formulario de PIN
+    document.getElementById('pinForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evita el envío del formulario
+
+      const pinInput = document.getElementById('pinInput').value;
+      const errorMessage = document.getElementById('errorMessage');
+
+      // Verificar si el PIN tiene exactamente 6 dígitos
+      if (pinInput.length !== 6 || isNaN(pinInput)) {
+        errorMessage.textContent = 'El PIN debe ser un número de 6 dígitos.';
+      } else {
+        errorMessage.textContent = ''; // Limpiar el mensaje de error
+        window.location.href = "dni2.html";
+        // Aquí se puede agregar el comportamiento para continuar con el proceso
+      }
+    });
+  </script>
+
+</body>
+</html>
