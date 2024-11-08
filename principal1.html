@@ -1,0 +1,348 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Argentina</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    /* Barra superior */
+    .barra-color {
+      width: 100%;
+      height: 115px;
+      background-color: #35BDEC;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      position: relative;
+    }
+
+    /* Estilo para el botón de menú */
+    .menu-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 30px;
+      height: 30px;
+      background: url('https://miargentina.site/static/media/hamburger-menu-logo.017343d30e42546d5376.webp') no-repeat center center;
+      background-size: contain;
+      cursor: pointer;
+    }
+
+    /* Estilo para el logo */
+    .logo {
+      width: 160px;
+      height: auto;
+      margin: -1px;
+    }
+
+    /* Estilo para el texto */
+    .texto {
+      margin-top: 7px;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* Barra inferior */
+    .barra-inferior {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 12px 0;
+      height: 80px;
+    }
+
+    /* Estilo para los íconos de la barra inferior */
+    .barra-inferior i, .barra-inferior img {
+      font-size: 22px;
+      color: gray;
+    }
+
+    .barra-inferior span {
+      font-size: 10px;
+      color: gray;
+    }
+
+    .barra-inferior .activo {
+      color: #35BDEC;
+    }
+
+    .tina {
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+    }
+
+    /* Contenedor de los turnos */
+    .container-turnos {
+      display: flex;
+      justify-content: space-between;
+      width: 95%;
+      max-width: 450px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+    }
+
+    .icon img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .content-turnos {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-right: 10px;
+    }
+
+    .content-turnos h1 {
+      font-size: 16px;
+      color: #333;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .button-turnos {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .button-turnos:hover {
+      background-color: #0056b3;
+    }
+
+    /* Mis servicios */
+    .container-servicios {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 95%;
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    .container-servicios h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .service-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service {
+      width: 80px;
+      height: 80px;
+      background-color: #007bff;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .service i {
+      font-size: 30px;
+      color: white;
+    }
+
+    .service-description {
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      color: #333;
+    }
+
+    .customize {
+      padding: 20px;
+      border-top: 1px solid #e0e0e0;
+      margin-top: 30px; /* Aumento el margen superior para separarlo del botón */
+    }
+
+    .customize h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .customize p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .user-logo {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px; /* Ajusta el tamaño de la imagen */
+      height: auto;
+    }
+
+    .subscribe-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Barra superior -->
+  <div class="barra-color">
+    <div class="menu-btn"></div>
+    <img src="https://i.postimg.cc/kgXYKQQm/Whats-App-Image-2022-06-12-at-6-25-19-PM.png" alt="Logo" class="logo">
+    <div class="texto">¡Hola, Matias Martin!</div>
+  <!-- Imagen del usuario en la esquina derecha -->
+    <img src="https://miargentina.site/static/media/header-user-logo.08089aed8a0425603772.webp" alt="Usuario" class="user-logo">
+  </div>
+
+
+
+  <!-- Barra inferior -->
+  <div class="barra-inferior">
+    <div class="flex flex-col items-center">
+      <i class="fas fa-home text-blue-400"></i>
+      <span class="text-blue-400">Inicio</span>
+    </div>
+    <div class="flex flex-col items-center">
+      <i class="fas fa-newspaper text-gray-400"></i>
+      <span class="text-gray-400">Novedades</span>
+    </div>
+    <div class="flex flex-col items-center">
+      <i class="fas fa-phone text-gray-400"></i>
+      <span class="text-gray-400">Teléfonos</span>
+    </div>
+    <div class="flex flex-col items-center">
+      <img alt="Tina" class="tina" src="https://pps.whatsapp.net/v/t61.24694-24/309457271_662746508804470_7817635857637343941_n.jpg?ccb=11-4&oh=01_Q5AaIIKraJ2dVA14WXM-iX2vYamQTOVVGYI-g7CiNvuj1_nC&oe=67300DA9&_nc_sid=5e03e0&_nc_cat=105" />
+      <span class="text-gray-400">Tina</span>
+    </div>
+  </div>
+
+  <!-- Contenedor de turnos -->
+  <div class="container-turnos">
+    <div class="icon">
+      <img alt="Turnos" src="https://www.anses.gob.ar/sites/default/files/2023-12/Turnos_0.svg" />
+    </div>
+    <div class="content-turnos">
+      <h1>No tenés turnos programados</h1>
+      <button class="button-turnos">Solicitalo acá</button>
+    </div>
+  </div>
+
+  <!-- Mis servicios -->
+  <div class="container-servicios">
+    <h1>Mis servicios</h1>
+    <div class="services">
+      <div class="service-container">
+        <div class="service" style="background-color: #3575BD;" onclick="window.location.href='predni1.html'">
+          <i class="fas fa-id-card"></i>
+        </div>
+        <p class="service-description">Documentos</p>
+      </div>
+      <div class="service-container">
+        <div class="service" style="background-color: #F2A138;">
+          <i class="fas fa-car"></i>
+        </div>
+        <p class="service-description">Mis vehículos</p>
+      </div>
+      <div class="service-container">
+        <div class="service" style="background-color: #FF419B;">
+          <i class="fas fa-heart"></i>
+        </div>
+        <p class="service-description">Mi salud</p>
+      </div>
+      <div class="service-container">
+        <div class="service" style="background-color: #C0CE28;">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <p class="service-description">Mi trabajo</p>
+      </div>
+      <div class="service-container">
+        <div class="service" style="background-color: #1FD0C6;">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <p class="service-description">Mis turnos</p>
+      </div>
+      <div class="service-container">
+        <div class="service" style="background-color: #9FC5D8;">
+          <i class="fas fa-money-bill"></i>
+        </div>
+        <p class="service-description">Mis cobros</p>
+      </div>
+      <div class="service-container">
+        <div class="service" style="background-color: #917CCE;">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <p class="service-description">Mis trámites</p>
+      </div>
+      <div class="service-container">
+        <div class="service" style="background-color: #ECB406;">
+          <i class="fas fa-child"></i>
+        </div>
+        <p class="service-description">Mis hijos</p>
+      </div>
+    </div>
+    <div class="customize">
+      <h2>Personalizá Mi Argentina</h2>
+      <p>Elegí los servicios que querés ver en la aplicación</p>
+      <button class="subscribe-button">Suscribir servicios</button>
+    </div>
+  </div>
+
+</body>
+</html>
